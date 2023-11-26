@@ -16,17 +16,12 @@ const port = parseInt(process.env.PORT, 10) || 3000
 
 const app = express()
 
-app.use(
-    basicAuth({
-        users: { [process.env.ADMIN_USER]: process.env.ADMIN_PASSWORD },
-    }),
-)
+
 app.use(morgan(process.env.MORGAN_LOG))
-app.use(cors({ origin: process.env.ORIGIN }))
+app.use(cors({origin: process.env.CORS_ORIGIN, exposedHeaders: [ 'x-total-count', 'x-total-pages'] }))
 app.use(helmet())
 app.use(bodyParser.json())
-
-app.use(router)
+app.use('/', router)
 
 app.use(notFound)
 app.use(errorHandler)

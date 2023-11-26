@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 
 import persons from './persons'
-import companies from './companies'
+import companies from './coffee'
 import departments from './departments'
 import employees from './employees'
 
