@@ -2,6 +2,7 @@ import { Router } from 'express'
 
 import {
   getcoffee,
+  getcoffees,
   addcoffee,
   updatecoffee,
   deletecoffee,
@@ -14,7 +15,7 @@ router.get('/', async (req, res) => {
   const page = Number(req.query.page) || 1
   const skip = size * (page - 1)
   const take = size
-  const { count, coffee } = await getcoffee(skip, take)
+  const { count, coffee } = await getcoffees(skip, take)
   res.set({
     'X-Total-Count': count,
     'X-Total-Pages': Math.ceil(count / size),
