@@ -4,5 +4,5 @@ CREATE TABLE "Coffee" (
     "name" TEXT NOT NULL,
     "image" TEXT NOT NULL,
 
-    CONSTRAINT "Demon_pkey" PRIMARY KEY ("coffeeId")
+    CONSTRAINT "coffee_pkey" PRIMARY KEY ("coffeeId")
 );

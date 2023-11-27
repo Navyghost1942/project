@@ -1,29 +1,29 @@
 import { v4 as uuid } from 'uuid'
 
-const persons = []
+const coffees = []
 
-export const getPersons = () => persons
+export const getCoffees = () => coffees
 
-export const getPerson = (id) => {
-    return persons.find((person) => person.id === id)
+export const getCoffee = (id) => {
+    return coffees.find((coffee) => coffee.id === id)
 }
 
-export const createPerson = (person) => {
+export const createCoffee = (coffee) => {
     const id = uuid()
-    persons.push({ id, ...person })
+    coffees.push({ id, ...coffee })
 }
 
-export const updatePerson = (id, person) => {
-    const databasePerson = getPerson(id)
-    if (databasePerson) {
-        const personIndex = persons.findIndex((p) => p.id === id)
-        persons[personIndex] = { id, ...person }
+export const updateCoffee = (id, coffee) => {
+    const databaseCoffee = getCoffee(id)
+    if (databaseCoffee) {
+        const coffeeIndex = coffees.findIndex((p) => p.id === id)
+        coffees[coffeeIndex] = { id, ...coffee }
     }
 }
 
-export const deletePerson = (id) => {
-    const personIndex = persons.findIndex((p) => p.id === id )
-    if (personIndex !== -1) {
-        persons.splice(personIndex, 1)
+export const deleteCoffee = (id) => {
+    const coffeeIndex = coffees.findIndex((p) => p.id === id )
+    if (coffeeIndex !== -1) {
+        coffees.splice(coffeeIndex, 1)
     }
 }
