@@ -1,2 +1,2 @@
 -- AlterTable
-ALTER TABLE "Coffee" RENAME CONSTRAINT "Demon_pkey" TO "Coffee_pkey";
+ALTER TABLE "Coffee" RENAME CONSTRAINT "Coffee_pkey" TO "Coffee_pkey";

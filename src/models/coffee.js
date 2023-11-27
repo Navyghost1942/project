@@ -8,7 +8,7 @@ export const getCoffee = (id) => {
     return coffees.find((coffee) => coffee.id === id)
 }
 
-export const createCoffee = (coffee) => {
+export const addCoffee = (coffee) => {
     const id = uuid()
     coffees.push({ id, ...coffee })
 }

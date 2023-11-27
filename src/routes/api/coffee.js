@@ -2,7 +2,6 @@ import { Router } from 'express'
 
 import {
   getcoffee,
-  getcoffee,
   addcoffee,
   updatecoffee,
   deletecoffee,
