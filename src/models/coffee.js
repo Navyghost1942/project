@@ -1,29 +1,30 @@
-import { v4 as uuid } from 'uuid'
+import db from '../helpers/db'
 
-const coffees = []
-
-export const getCoffees = () => coffees
-
-export const getCoffee = (id) => {
-    return coffees.find((coffee) => coffee.id === id)
+export const getcoffees = async (skip, take) => {
+  const count = await db.coffee.count()
+  const coffees = await db.coffee.findMany({
+    skip,
+    take,
+  })
+  return { count, coffees }
 }
 
-export const addCoffee = (coffee) => {
-    const id = uuid()
-    coffees.push({ id, ...coffee })
+export const getcoffee = async (id) =>
+  db.coffee.findUnique({ where: { coffeeId: id } })
+
+export const addcoffee = async (coffeeData) =>
+  db.coffee.create({ data: { ...coffeeData } })
+
+export const updatecoffee = async (id, coffeeData) => {
+  const coffee = await getcoffee(id)
+  if (coffee) {
+    return db.coffee.update({
+      where: { coffeeId: id },
+      data: { ...coffee, ...coffeeData, updatedAt: new Date() },
+    })
+  }
+  return null
 }
 
-export const updateCoffee = (id, coffee) => {
-    const databaseCoffee = getCoffee(id)
-    if (databaseCoffee) {
-        const coffeeIndex = coffees.findIndex((p) => p.id === id)
-        coffees[coffeeIndex] = { id, ...coffee }
-    }
-}
-
-export const deleteCoffee = (id) => {
-    const coffeeIndex = coffees.findIndex((p) => p.id === id )
-    if (coffeeIndex !== -1) {
-        coffees.splice(coffeeIndex, 1)
-    }
-}
+export const deletecoffee = async (id) =>
+  db.coffee.delete({ where: { coffeeId: id } })
