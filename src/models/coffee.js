@@ -1,30 +1,30 @@
 import db from '../helpers/db'
 
-export const getcoffees = async (skip, take) => {
-  const count = await db.coffee.count()
-  const coffees = await db.coffee.findMany({
+export const getCoffees = async (skip, take) => {
+  const count = await db.Coffee.count()
+  const Coffees = await db.Coffee.findMany({
     skip,
     take,
   })
-  return { count, coffees }
+  return { count, Coffees }
 }
 
-export const getcoffee = async (id) =>
-  db.coffee.findUnique({ where: { coffeeId: id } })
+export const getCoffee = async (id) =>
+  db.Coffee.findUnique({ where: { coffeeId: id } })
 
-export const addcoffee = async (coffeeData) =>
-  db.coffee.create({ data: { ...coffeeData } })
+export const addCoffee = async (CoffeeData) =>
+  db.Coffee.create({ data: { ...CoffeeData } })
 
-export const updatecoffee = async (id, coffeeData) => {
-  const coffee = await getcoffee(id)
-  if (coffee) {
-    return db.coffee.update({
+export const updateCoffee = async (id, CoffeeData) => {
+  const Coffee = await getCoffee(id)
+  if (Coffee) {
+    return db.Coffee.update({
       where: { coffeeId: id },
-      data: { ...coffee, ...coffeeData, updatedAt: new Date() },
+      data: { ...Coffee, ...CoffeeData, updatedAt: new Date() },
     })
   }
   return null
 }
 
-export const deletecoffee = async (id) =>
-  db.coffee.delete({ where: { coffeeId: id } })
+export const deleteCoffee = async (id) =>
+  db.Coffee.delete({ where: { coffeeId: id } })

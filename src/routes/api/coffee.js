@@ -1,11 +1,11 @@
 import { Router } from 'express'
 
 import {
-  getcoffee,
-  getcoffees,
-  addcoffee,
-  updatecoffee,
-  deletecoffee,
+  getCoffee,
+  getCoffees,
+  addCoffee,
+  updateCoffee,
+  deleteCoffee,
 } from '../../models/coffee'
 
 const router = Router()
@@ -15,43 +15,43 @@ router.get('/', async (req, res) => {
   const page = Number(req.query.page) || 1
   const skip = size * (page - 1)
   const take = size
-  const { count, coffee } = await getcoffees(skip, take)
+  const { count, Coffees } = await getCoffees(skip, take)
   res.set({
     'X-Total-Count': count,
     'X-Total-Pages': Math.ceil(count / size),
   })
-  res.send(coffee)
+  res.send(Coffees)
 })
 
 router.get('/:id', async (req, res) => {
-  const coffee = await getcoffee(req.params.id)
-  if (coffee) {
-    res.send(coffee)
+  const Coffee = await getCoffee(req.params.id)
+  if (Coffee) {
+    res.send(Coffee)
   } else {
-    res.status(404).send({ msg: 'coffee not found' })
+    res.status(404).send({ msg: 'Coffee not found' })
   }
 })
 
 router.post('/', async (req, res) => {
-  const coffee = await addcoffee(req.body)
-  res.send(coffee)
+  const Coffee = await addCoffee(req.body)
+  res.send(Coffee)
 })
 
 router.put('/:id', async (req, res) => {
-  const coffee = await updatecoffee(req.params.id, req.body)
-  if (coffee) {
-    res.send(coffee)
+  const Coffee = await updateCoffee(req.params.id, req.body)
+  if (Coffee) {
+    res.send(Coffee)
   } else {
-    res.status(404).send({ msg: 'coffee not found' })
+    res.status(404).send({ msg: 'Coffee not found' })
   }
 })
 
 router.delete('/:id', async (req, res) => {
-  const coffee = await deletecoffee(req.params.id)
-  if (coffee) {
-    res.send(coffee)
+  const Coffee = await deleteCoffee(req.params.id)
+  if (Coffee) {
+    res.send(Coffee)
   } else {
-    res.status(404).send({ msg: 'coffee not found' })
+    res.status(404).send({ msg: 'Coffee not found' })
   }
 })
 
